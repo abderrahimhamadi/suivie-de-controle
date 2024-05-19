@@ -1,0 +1,30 @@
+.my_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.homePage {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+.homePage_header {
+  display: flex;
+}
+
+.homePage_title {
+  font-weight: 400;
+  font-size: 25px;
+  border-bottom: solid #6095C1 2px;
+  margin-top: 20px;
+}
+
+.homePage_body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 450px;
+}
+

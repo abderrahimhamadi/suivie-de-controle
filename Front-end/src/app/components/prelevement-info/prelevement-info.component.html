@@ -1,0 +1,102 @@
+<div class="my_container">
+
+  <div class="top">
+    <div class="top_left">
+      <form [formGroup]="filterFormGroup" (ngSubmit)="handleFilterPrelevement()" class="filter_form">
+        <div class="filter_name">
+          <label class="filter_label">Nom du produit: </label>
+          <input type="text" formControlName="keyword" class="filter_input">
+        </div>
+        <div class="filter_number">
+          <label class="filter_label">Numéro de Proces Verbal: </label>
+          <input type="number" formControlName="numeroProcesVerbal" class="filter_input filter_input_number">
+        </div>
+        <div class="filter_etat">
+          <label class="filter_label">Etat d'avancement:</label>
+          <select class="filter_select" formControlName="etat">
+            <option></option>
+            <option value="EN_INSTANCE" >EN_INSTANCE</option>
+            <option value="TERMINEE" >TERMINEE</option>
+          </select>
+        </div>
+        <button class="filter_btn"><i class="bi bi-search"> Chercher</i></button>
+      </form>
+    </div>
+    <div class="top_right" *ngIf="decodedToken.type==='AGENT_CONTROLE'">
+
+      <button  class="btn_add" (click)="goToPrelevementForm()">
+        <i class="bi bi-plus-circle"> Ajouter</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="table">
+    <div class="table_head">
+      <div class="table_item table_item_head">ID</div>
+      <div class="table_item table_item_head">Nom du produit</div>
+      <div class="table_item table_item_head">Catégorie</div>
+      <div class="table_item table_item_head">Date de procés verbal</div>
+      <div class="table_item table_item_head">Numéro de procés verbal</div>
+      <div class="table_item table_item_head">Type de prélèvement</div>
+      <div class="table_item table_item_head">Niveau de prélèvement</div>
+      <div class="table_item table_item_head">Cadre de control</div>
+      <div class="table_item table_item_head">Labo</div>
+      <div class="table_item table_item_head">Date d’envoi</div>
+      <div class="table_item table_item_head">Etat d’avancement</div>
+      <div class="table_item table_item_head" *ngIf="decodedToken.type==='AGENT_CONTROLE'"></div>
+      <div class="table_item table_item_head" *ngIf="decodedToken.type==='AGENT_CONTROLE'"></div>
+      <div class="table_item table_item_head table_item_special" *ngIf="decodedToken.type==='RESPO_LABO'"></div>
+
+    </div>
+    <ng-container *ngIf="prelevementResponses">
+      <div class="table_body"  *ngFor="let prelevement of prelevementResponses.prelevementDTOS; let i = index">
+        <div class="table_item">{{prelevement.id}}</div>
+        <div class="table_item">{{prelevement.produitDTO.nom}}</div>
+        <div class="table_item">{{prelevement.produitDTO.categorie}}</div>
+        <div class="table_item">{{prelevement.dateProcesVerbal | date : 'dd-MM-yyyy'}}</div>
+        <div class="table_item">{{prelevement.numeroProcesVerbal}}</div>
+        <div class="table_item">{{prelevement.typePrelevement}}</div>
+        <div class="table_item">{{prelevement.niveauPrel}}</div>
+        <div class="table_item">{{prelevement.cadreControle}}</div>
+        <div class="table_item">{{prelevement.laboDestination}}</div>
+        <div class="table_item">{{prelevement.dateEnvoie | date : 'dd-MM-yyyy'}}</div>
+        <div class="table_item">{{prelevement.etatAvancement}}</div>
+        <div class="table_item" *ngIf="decodedToken.type==='AGENT_CONTROLE'">
+          <button class="btn btn_delete"
+                  (click)="handleDeletePrelevement(prelevement.id,
+                  prelevementResponses.currentPage, prelevementResponses.pageSize)">
+            <i class="bi bi-trash-fill icon"></i>
+          </button>
+        </div>
+        <div class="table_item" *ngIf="decodedToken.type==='AGENT_CONTROLE'">
+          <button class="btn btn_update"
+                  (click)="handleUpdatePrelevement(prelevement, prelevementResponses.currentPage)">
+            <i class="bi bi-pencil-fill icon"></i>
+          </button>
+        </div>
+        <div class="table_item_special" *ngIf="decodedToken.type==='RESPO_LABO'">
+          <button *ngIf="prelevement.etatAvancement === 'EN_INSTANCE'" class="btn btn-outline-primary btn_special_add" (click)="goToPrelevemenresultat(prelevement)">
+            <i class="bi bi-plus-circle"> Enregistrer le resultat</i>
+          </button>
+          <i class="bi bi-check-circle text-success" *ngIf="prelevement.etatAvancement === 'TERMINEE'"> Resultat Enregistré</i>
+        </div>
+      </div>
+
+      <ul class="pages">
+        <li class="page" *ngFor="let item of [].constructor(prelevementResponses.totalPages); let page=index">
+          <a>
+            <button [ngClass]="page==prelevementResponses.currentPage? 'btn_current_page': 'btn_page'"
+                    (click)="goToPage(page)" >
+              {{page}}
+            </button>
+          </a>
+        </li>
+      </ul>
+
+    </ng-container>
+
+  </div>
+
+
+
+</div>

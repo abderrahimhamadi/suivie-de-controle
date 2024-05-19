@@ -1,0 +1,22 @@
+<nav class="my_navbar">
+  <a class="my_navbar_logo" routerLink="/" (click)="direct()" >
+    <img ngSrc="assets/Logo.png" height="54" width="319">
+  </a>
+  <ul class="my_navbar_items">
+    <li  >
+      <a [routerLinkActive]="'active'" routerLink="/prelevements">{{log? 'Prélévemenets':''}}</a>
+    </li>
+    <li *ngIf="isRespoLabo">
+      <a [routerLinkActive]="'active'" routerLink="resultatPrelevements">{{log? 'Résultats':''}}</a>
+    </li>
+  </ul>
+  <div class="my_navbar_avatar" *ngIf="log">
+    <img (click)="open()" ngSrc="assets/avatar.png" height="50" width="50">
+  </div>
+</nav>
+<div *ngIf="log" [ngClass]="status ? 'success' : 'danger'" class="MENU" >
+  <div class="menu">
+    <div>Mr {{authservice.decodedToken.nom}}</div>
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>

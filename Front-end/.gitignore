@@ -1,0 +1,9 @@
+node_modules/
+
+# Build output
+dist/
+
+# Environment config files
+src/environments/*.js
+
+.angular/

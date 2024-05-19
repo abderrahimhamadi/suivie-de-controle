@@ -1,0 +1,22 @@
+.feed{
+  border: 3px solid #6095C1;
+  padding:2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.icon svg{
+  color: green;
+}
+
+.par{
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 2%;
+}
+
+.feed button{
+  margin-top: 2%;
+}

@@ -1,0 +1,98 @@
+
+<div class="header">Enregister les informations de prélèvement d'échantillons:</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="prelevementFormGroup" #f="ngForm">
+  <div class="my_container">
+    <div class="Nom">
+      <label for="nom" >Nom du produit:</label>
+      <input [value]="prelevementFormGroup.value.nom"
+             formControlName="nom" placeholder="tomates"
+             type="text"  id="nom"  name="nom" required
+      >
+    </div>
+
+    <div class="Nom">
+      <label for="categorie">Catégorie du produit:</label>
+      <input [value]="prelevementFormGroup.value.categorie"
+             formControlName="categorie" placeholder="ex:légume"
+             type="text"  name="categorie" id="categorie" required
+      >
+    </div>
+
+    <div class="Nom">
+      <label  for="numero">Numéro du procès verbal:</label>
+      <input [value]="prelevementFormGroup.value.numeroProcesVerbal"
+             formControlName="numeroProcesVerbal" placeholder="ex:2304"
+             type="text"  name="numeroProcesVerbal" id="numero" required
+      >
+    </div>
+
+    <div class="Nom">
+      <label for="date">Date du proces verbal</label>
+      <input [value]="prelevementFormGroup.value.dateProcesVerbal | date : 'yyyy-MM-dd'"
+             formControlName="dateProcesVerbal"
+             type="date"  name="dateProcesVerbal" id="date" required
+      >
+    </div>
+
+    <div class="Nom">
+      <label for="cars">Type du prélevement:</label>
+      <select [value]="prelevementFormGroup.value.typePrelevement" id="cars"
+              formControlName="typePrelevement"
+      >
+        <option>P</option>
+        <option>RS</option>
+      </select>
+    </div>
+
+    <div class="Nom">
+      <label for="niveauPrel">Niveau du prélvement:</label>
+      <select [value]="prelevementFormGroup.value.niveauPrel"
+              id="niveauPrel" formControlName="niveauPrel"
+      >
+        <option>GMS</option>
+        <option>G</option>
+        <option>D</option>
+        <option>P</option>
+        <option>A</option>
+        <option>ES</option>
+      </select>
+    </div>
+
+    <div class="Nom">
+      <label for="cadreControle">Cadre du controle:</label>
+      <select [value]="prelevementFormGroup.value.cadreControle"
+              id="cadreControle" formControlName="cadreControle"
+      >
+        <option>PC1</option>
+        <option>PC2</option>
+        <option>PC3</option>
+        <option>FLA</option>
+        <option>PCTM</option>
+        <option>PMIC</option>
+        <option>PPF</option>
+      </select>
+    </div>
+
+    <div class="Nom">
+      <label for="labo">Labo de destination:</label>
+      <select [value]="prelevementFormGroup.value.laboDestination"
+              id="labo" formControlName="laboDestination"
+      >
+        <option>LOARC</option>
+        <option>LRAR</option>
+      </select>
+    </div>
+
+    <div class="Nom">
+      <label for="dateEnvoi">Date d'envoi d'echantillon</label>
+      <input [value]="prelevementFormGroup.value.dateEnvoie | date : 'yyyy-MM-dd'"
+             formControlName="dateEnvoie"
+             type="date" name="dateEnvoie" id="dateEnvoi" required
+      >
+    </div>
+
+  </div>
+
+  <button type="submit" [disabled]="!f.valid" class="btn btn-success">Soumettre</button>
+
+</form>

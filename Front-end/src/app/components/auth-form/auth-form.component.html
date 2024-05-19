@@ -1,0 +1,8 @@
+<form [formGroup]="authFormGroup" (ngSubmit)="handleAuthentication()">
+  <h1>S'identifier</h1>
+  <input type="email" placeholder="Adresse Email" formControlName="email">
+  <input type="password"placeholder="Mot de passe" formControlName="password">
+  <p class="error text-danger" *ngIf="message">{{message}}</p>
+  <button>connexion</button>
+  <a routerLink="register">Créer un compte?</a>
+</form>

@@ -1,0 +1,48 @@
+form {
+  border: solid #CCCCCC 2px;
+  border-top: solid #6095C1 7px;
+  width: 400px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+h1 {
+  color: #6095C1;
+}
+
+input {
+  width: 73%;
+  height: 35px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  ackground: #F9F9F9;
+  border: 2px solid #CCCCCC;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+
+button {
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
+  padding: 7px 14px;
+  background: #6095C1;
+  border-radius: 10px;
+  border: none;
+}
+
+button:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #7CABE1;
+  border-bottom: solid #7CABE1 1px;
+  margin-bottom: 10px;
+}

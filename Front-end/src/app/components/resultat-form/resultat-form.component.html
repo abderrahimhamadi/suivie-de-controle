@@ -1,0 +1,47 @@
+<div class="header"> Enregister les résultats de prélèvement d'échantillons:{{resultat.idPrelevement}}</div>
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="my_container">
+    <div class="Nom">
+      <label>Numéro BA:</label>
+      <input placeholder="ex:2334" type="text" ngModel  name="numeroBA" required number>
+    </div>
+
+    <div class="Nom">
+      <label>Date de BA:</label>
+      <input type="date" ngModel name="date_BA" required>
+    </div>
+
+    <div class="Nom">
+      <label>Conformité:</label>
+      <select [(ngModel)]="selected"  name="choix">
+        <option >Oui</option>
+        <option >Non</option>
+      </select>
+    </div>
+
+  </div>
+  <div  class="my_container2" *ngIf="selected==='Non'" >
+    <div class="liner"></div>
+    <div class="header">Détail de non conformité</div>
+
+    <div class="my_container" >
+
+      <div class="Nom">
+        <label  >Numéro TA:</label>
+        <input placeholder="ex:2334" type="text" ngModel  name="NuméroTA" required number>
+      </div>
+
+      <div class="Nom">
+        <label>Date TA:</label>
+        <input  type="Date" ngModel  name="DateTA" required>
+      </div>
+
+      <div class="Nom">
+        <label>Détail:</label>
+        <input  type="text" ngModel  name="Détail" required>
+      </div>
+    </div>
+
+  </div>
+  <button type="submit" [disabled]="!f.valid" class="btn btn-success">Soumettre</button>
+</form>

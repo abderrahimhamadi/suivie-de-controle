@@ -1,0 +1,84 @@
+<div class="my_container">
+  <div class="top">
+    <!--<div class="top_left">
+      <form class="search_bar" [formGroup]="searchFormGroup" (ngSubmit)="handleSearchPrelevement()">
+        <input class="search_bar_input" type="text" formControlName="keyword">
+        <button class="search_bar_btn"><i class="bi bi-search"> Chercher</i></button>
+      </form>
+    </div>-->
+    <div class="top_left">
+      <form [formGroup]="searchFormGroup" (ngSubmit)="handleFilterResultat()" class="filter_form">
+        <div class="filter_name">
+          <label class="filter_label">Nom du produit: </label>
+          <input type="text" formControlName="keyword" class="filter_input">
+        </div>
+        <div class="filter_number">
+          <label class="filter_label">Numéro de BA: </label>
+          <input type="number" formControlName="numeroBA" class="filter_input filter_input_number">
+        </div>
+        <div class="filter_etat">
+          <label class="filter_label">Conformité:</label>
+          <select class="filter_select" formControlName="conforme">
+            <option></option>
+            <option value=Oui >Oui</option>
+            <option value=Non >Non</option>
+          </select>
+        </div>
+        <button class="filter_btn"><i class="bi bi-search"> Chercher</i></button>
+      </form>
+    </div>
+   
+  </div>
+
+  <div class="table">
+    <div class="table_head">
+      <div class="table_item">ID</div>
+      <div class="table_item">Réf prélévement</div>
+      <div class="table_item">Produit</div>
+      <div class="table_item">Numéro BA</div>
+      <div class="table_item">Date BA</div>
+      <div class="table_item">Conformité</div>
+      <div class="table_item">Numéro TA</div>
+      <div class="table_item">Date TA</div>
+      <div class="table_item">Détail</div>
+      <div class="table_item" *ngIf="typePersonne=='RESPO_LABO'"></div>
+      <div class="table_item" *ngIf="typePersonne=='RESPO_LABO'"></div>
+    </div>
+    <ng-container *ngIf="resultats">
+      <div class="table_body" *ngFor="let resultat of resultats.resultatPrelevementDTOS; let i=index">
+        <div class="table_item">{{resultat.id}}</div>
+        <div class="table_item">{{resultat.idPrelevement}}</div>
+        <div class="table_item">{{resultat.nomProduit}}</div>
+        <div class="table_item">{{resultat.numeroBA}}</div>
+        <div class="table_item">{{resultat.dateBA | date : 'dd-MM-YYYY'}}</div>
+        <div class="table_item">{{resultat.conforme? 'Oui':'Non'}}</div>
+        <div class="table_item">{{resultat.conforme? '-':resultat.numeroTA}}</div>
+        <div class="table_item">{{resultat.conforme? '-':resultat.dateTA}}</div>
+        <div class="table_item">{{resultat.conforme? '-':resultat.detail}}</div>
+        <div class="table_item" *ngIf="typePersonne=='RESPO_LABO'">
+          <button class="btn btn_delete" (click)="handleDeleteResultat(resultat.id)">
+            <i class="bi bi-trash-fill icon"></i>
+          </button>
+        </div>
+        <div class="table_item" (click)="handleUpdateReultat(resultat)" *ngIf="typePersonne=='RESPO_LABO'">
+          <button class="btn btn_update">
+            <i class="bi bi-pencil-fill icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <ul class="pages">
+        <li class="page" *ngFor="let item of [].constructor(resultats.totalPages); let page=index">
+          <a>
+            <button [ngClass]="page==resultats.currentPage? 'btn_current_page': 'btn_page'"
+                    (click)="goToPage(page)" >
+              {{page}}
+            </button>
+          </a>
+        </li>
+      </ul>
+
+    </ng-container>
+  </div>
+</div>
+
